@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AO-Mind — Multi-Agent AI Framework for Arweave/AO</title>
+  <meta name="description" content="Open-source multi-agent AI framework for Arweave/AO blockchain. Game analysis, contract auditing, content generation & player analytics — powered by MiMo, Claude & GPT." />
+  <meta property="og:title" content="AO-Mind — Multi-Agent AI for AO Blockchain" />
+  <meta property="og:description" content="4 specialized AI agents for the AO/Arweave ecosystem. 4.8M tokens/day in production." />
+  <meta property="og:url" content="https://anwarsup.github.io/ao-mind/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- CANVAS PARTICLES -->
+<canvas id="particles"></canvas>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <span class="logo-icon">⬡</span>
+      <span class="logo-text">AO<span class="accent">-Mind</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="#agents">Agents</a>
+      <a href="#architecture">Architecture</a>
+      <a href="#stats">Stats</a>
+      <a href="#quickstart">Quickstart</a>
+      <a href="https://github.com/AnwarSup/ao-mind" target="_blank" class="btn-nav">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        GitHub
+      </a>
+    </div>
+    <button class="nav-toggle" id="navToggle">☰</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      Built on AO &amp; Arweave • Powered by MiMo V2.5-Pro
+    </div>
+    <h1 class="hero-title">
+      Multi-Agent AI<br/>
+      <span class="gradient-text">for the Permaweb</span>
+    </h1>
+    <p class="hero-sub">
+      4 specialized AI agents that automate game analysis, Lua contract auditing,
+      social content generation, and player behavior prediction — all on the
+      <strong>AO blockchain</strong>.
+    </p>
+    <div class="hero-cta">
+      <a href="#quickstart" class="btn-primary">
+        <span>Get Started</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="https://github.com/AnwarSup/ao-mind" target="_blank" class="btn-secondary">
+        View on GitHub
+      </a>
+    </div>
+    <!-- Terminal -->
+    <div class="terminal-wrap">
+      <div class="terminal-bar">
+        <span class="dot red"></span>
+        <span class="dot yellow"></span>
+        <span class="dot green"></span>
+        <span class="terminal-title">ao-mind ~ orchestrator</span>
+      </div>
+      <div class="terminal-body" id="terminal">
+        <div class="t-line"><span class="t-prompt">$</span> <span class="t-cmd">node src/orchestrator.js</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BANNER -->
+<section id="stats">
+  <div class="stats-inner">
+    <div class="stat-card" data-target="4800000" data-suffix="/day">
+      <div class="stat-num" id="stat-tokens">0</div>
+      <div class="stat-label">Tokens Processed Daily</div>
+    </div>
+    <div class="stat-card" data-target="4" data-suffix=" Agents">
+      <div class="stat-num" id="stat-agents">0</div>
+      <div class="stat-label">Specialized AI Agents</div>
+    </div>
+    <div class="stat-card" data-target="20" data-suffix="+ Users">
+      <div class="stat-num" id="stat-users">0</div>
+      <div class="stat-label">Active Developers</div>
+    </div>
+    <div class="stat-card" data-target="35" data-suffix="hrs/wk">
+      <div class="stat-num" id="stat-hours">0</div>
+      <div class="stat-label">Hours Saved Weekly</div>
+    </div>
+  </div>
+</section>
+
+<!-- AGENTS -->
+<section id="agents">
+  <div class="section-inner">
+    <div class="section-label">Core Features</div>
+    <h2 class="section-title">Four Agents, One Framework</h2>
+    <p class="section-sub">Each agent is purpose-built for a specific task in the AO ecosystem, using the best model for the job.</p>
+
+    <div class="agents-grid">
+
+      <div class="agent-card" style="--accent:#7c3aed">
+        <div class="agent-icon">🎮</div>
+        <div class="agent-tag" style="background:rgba(124,58,237,0.15);color:#a78bfa">MiMo-V2.5-Pro</div>
+        <h3>Game Analyzer</h3>
+        <p>Real-time game state analysis for Chess, Pacman, 4 Cards & all Ctrl Play games. Generates post-game reports stored permanently on Arweave.</p>
+        <div class="agent-stats">
+          <div class="astat"><span>1.4M</span> tokens/day</div>
+          <div class="astat"><span>150+</span> sessions/day</div>
+        </div>
+        <div class="agent-code">
+<pre><code><span class="c-purple">const</span> result = <span class="c-blue">await</span> analyzer.<span class="c-green">analyze</span>({
+  game: <span class="c-yellow">'chess'</span>,
+  state: <span class="c-yellow">'rnbq...'</span>,
+  playerLevel: <span class="c-yellow">'intermediate'</span>
+})
+<span class="c-comment">// bestMove: 'd6', confidence: 91%</span></code></pre>
+        </div>
+      </div>
+
+      <div class="agent-card" style="--accent:#0891b2">
+        <div class="agent-icon">🔍</div>
+        <div class="agent-tag" style="background:rgba(8,145,178,0.15);color:#22d3ee">MiMo + Deepseek</div>
+        <h3>Contract Auditor</h3>
+        <p>Audits Lua smart contracts on AO processes. Detects access control flaws, reentrancy, missing sender verification, and logic errors before deployment.</p>
+        <div class="agent-stats">
+          <div class="astat"><span>1.1M</span> tokens/day</div>
+          <div class="astat"><span>CRITICAL→LOW</span> severity</div>
+        </div>
+        <div class="agent-code">
+<pre><code><span class="c-purple">const</span> report = <span class="c-blue">await</span> auditor.<span class="c-green">audit</span>(luaCode, {
+  processId: <span class="c-yellow">'AO_PROC...'</span>,
+  strictMode: <span class="c-blue">true</span>
+})
+<span class="c-comment">// severity: HIGH, issues: 3</span></code></pre>
+        </div>
+      </div>
+
+      <div class="agent-card" style="--accent:#059669">
+        <div class="agent-icon">✍️</div>
+        <div class="agent-tag" style="background:rgba(5,150,105,0.15);color:#34d399">MiMo-V2.5 Omni</div>
+        <h3>Content Generator</h3>
+        <p>Auto-generates social posts for Pulse Protocol in 4 languages. Leaderboards, achievements, game tips — posted directly to AO on-chain.</p>
+        <div class="agent-stats">
+          <div class="astat"><span>800K</span> tokens/day</div>
+          <div class="astat"><span>EN/ID/ZH/JP</span></div>
+        </div>
+        <div class="agent-code">
+<pre><code><span class="c-purple">const</span> post = <span class="c-blue">await</span> gen.<span class="c-green">generateAndPost</span>({
+  type: <span class="c-yellow">'leaderboard'</span>,
+  game: <span class="c-yellow">'Chess'</span>,
+  language: <span class="c-yellow">'en'</span>
+})
+<span class="c-comment">// posted to Pulse → txId: abc...</span></code></pre>
+        </div>
+      </div>
+
+      <div class="agent-card" style="--accent:#d97706">
+        <div class="agent-icon">📊</div>
+        <div class="agent-tag" style="background:rgba(217,119,6,0.15);color:#fbbf24">Claude + MiMo</div>
+        <h3>Player Predictor</h3>
+        <p>Fetches on-chain activity from Arweave GraphQL and predicts churn risk, engagement trajectory, and peak activity windows for 200+ players.</p>
+        <div class="agent-stats">
+          <div class="astat"><span>1.5M</span> tokens/day</div>
+          <div class="astat"><span>200+</span> players tracked</div>
+        </div>
+        <div class="agent-code">
+<pre><code><span class="c-purple">const</span> pred = <span class="c-blue">await</span> predictor.<span class="c-green">predict</span>(addr)
+<span class="c-comment">// churnRisk: 0.23</span>
+<span class="c-comment">// trajectory: "rising"</span>
+<span class="c-comment">// peakHours: [19, 20, 21]</span></code></pre>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- MODEL ROUTER -->
+<section id="architecture">
+  <div class="section-inner">
+    <div class="section-label">Architecture</div>
+    <h2 class="section-title">Intelligent Model Routing</h2>
+    <p class="section-sub">AO-Mind's router automatically selects the best model for each task — MiMo first for cost-efficiency, with automatic fallback.</p>
+
+    <div class="arch-wrap">
+      <div class="arch-left">
+        <div class="routing-table">
+          <div class="rt-header">
+            <div>Task Type</div><div>Primary</div><div>Fallback</div>
+          </div>
+          <div class="rt-row">
+            <div><span class="tag-task">reasoning</span></div>
+            <div><span class="tag-mimo">MiMo-V2.5-Pro</span></div>
+            <div><span class="tag-claude">Claude Opus</span></div>
+          </div>
+          <div class="rt-row">
+            <div><span class="tag-task">coding</span></div>
+            <div><span class="tag-mimo">MiMo-V2.5-Pro</span></div>
+            <div><span class="tag-ds">Deepseek</span></div>
+          </div>
+          <div class="rt-row">
+            <div><span class="tag-task">analysis</span></div>
+            <div><span class="tag-claude">Claude Sonnet</span></div>
+            <div><span class="tag-mimo">MiMo-V2.5</span></div>
+          </div>
+          <div class="rt-row">
+            <div><span class="tag-task">content</span></div>
+            <div><span class="tag-mimo">MiMo Omni</span></div>
+            <div><span class="tag-gpt">GPT-4o</span></div>
+          </div>
+          <div class="rt-row">
+            <div><span class="tag-task">fast</span></div>
+            <div><span class="tag-mimo">MiMo-V2.5</span></div>
+            <div><span class="tag-gpt">GPT-4o-mini</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="arch-right">
+        <div class="flow-diagram">
+          <div class="flow-box flow-top">Agent Request</div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-box flow-router">Model Router<br/><small>cost-performance strategy</small></div>
+          <div class="flow-branches">
+            <div class="flow-branch">
+              <div class="flow-arrow">↓</div>
+              <div class="flow-box flow-mimo">🤖 MiMo V2.5<br/><small>Primary</small></div>
+            </div>
+            <div class="flow-branch">
+              <div class="flow-arrow">↓</div>
+              <div class="flow-box flow-fallback">Claude / GPT<br/><small>Fallback</small></div>
+            </div>
+          </div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-box flow-ao">AO Process / Arweave</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stack badges -->
+    <div class="stack-wrap">
+      <div class="stack-item"><span>⬡</span> AO Computer</div>
+      <div class="stack-item"><span>◈</span> Arweave</div>
+      <div class="stack-item"><span>⚡</span> Xiaomi MiMo V2.5</div>
+      <div class="stack-item"><span>◆</span> Anthropic Claude</div>
+      <div class="stack-item"><span>●</span> OpenAI GPT</div>
+      <div class="stack-item"><span>▸</span> Deepseek</div>
+      <div class="stack-item"><span>❋</span> Pulse Protocol</div>
+      <div class="stack-item"><span>JS</span> Node.js 18+</div>
+    </div>
+  </div>
+</section>
+
+<!-- TOKEN USAGE CHART -->
+<section id="usage">
+  <div class="section-inner">
+    <div class="section-label">Production Stats</div>
+    <h2 class="section-title">Built for Real Volume</h2>
+    <p class="section-sub">Daily token consumption across all agents — running 24/7 in production on Ctrl Play.</p>
+
+    <div class="chart-wrap">
+      <div class="chart-bars">
+        <div class="bar-group">
+          <div class="bar-fill" style="--pct:30%;--color:#7c3aed" data-val="1.4M"></div>
+          <div class="bar-label">Game<br/>Analyzer</div>
+        </div>
+        <div class="bar-group">
+          <div class="bar-fill" style="--pct:23%;--color:#0891b2" data-val="1.1M"></div>
+          <div class="bar-label">Contract<br/>Auditor</div>
+        </div>
+        <div class="bar-group">
+          <div class="bar-fill" style="--pct:17%;--color:#059669" data-val="0.8M"></div>
+          <div class="bar-label">Content<br/>Generator</div>
+        </div>
+        <div class="bar-group">
+          <div class="bar-fill" style="--pct:31%;--color:#d97706" data-val="1.5M"></div>
+          <div class="bar-label">Player<br/>Predictor</div>
+        </div>
+        <div class="bar-group">
+          <div class="bar-fill" style="--pct:100%;--color:linear-gradient(135deg,#7c3aed,#d97706)" data-val="4.8M"></div>
+          <div class="bar-label">Total<br/>Daily</div>
+        </div>
+      </div>
+      <div class="chart-note">tokens/day (30-day production average)</div>
+    </div>
+  </div>
+</section>
+
+<!-- QUICKSTART -->
+<section id="quickstart">
+  <div class="section-inner">
+    <div class="section-label">Get Started</div>
+    <h2 class="section-title">Up in 60 Seconds</h2>
+
+    <div class="steps-wrap">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <h4>Clone &amp; Install</h4>
+          <div class="code-block">
+<pre><code>git clone https://github.com/AnwarSup/ao-mind.git
+cd ao-mind
+npm install</code></pre>
+          </div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <h4>Configure API Keys</h4>
+          <div class="code-block">
+<pre><code>cp .env.example .env
+<span class="c-comment"># Add your keys:</span>
+MIMO_API_KEY=<span class="c-yellow">your_mimo_key</span>
+CLAUDE_API_KEY=<span class="c-yellow">your_claude_key</span>
+ARWEAVE_WALLET_PATH=<span class="c-yellow">./wallet.json</span></code></pre>
+          </div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <h4>Run the Agents</h4>
+          <div class="code-block">
+<pre><code><span class="c-comment"># Run all agents</span>
+npm run agents
+
+<span class="c-comment"># Or run individual examples</span>
+node examples/analyze-game.js
+node examples/audit-contract.js
+node examples/generate-content.js</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="cta-inner">
+    <div class="cta-glow"></div>
+    <h2>Start Building on AO</h2>
+    <p>Open source. MIT licensed. Plug into Claude Code, Cursor, or any AI coding tool.</p>
+    <div class="cta-btns">
+      <a href="https://github.com/AnwarSup/ao-mind" target="_blank" class="btn-primary btn-lg">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        View on GitHub
+      </a>
+      <a href="https://ctrlplayfrontend_arlink.arweave.net/" target="_blank" class="btn-secondary btn-lg">
+        Live Demo — Ctrl Play
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <span class="logo-icon">⬡</span>
+      <span>AO-Mind</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://github.com/AnwarSup/ao-mind" target="_blank">GitHub</a>
+      <a href="https://ao.computer/" target="_blank">AO Computer</a>
+      <a href="https://platform.xiaomimimo.com/" target="_blank">MiMo API</a>
+      <a href="https://ctrlplayfrontend_arlink.arweave.net/" target="_blank">Ctrl Play</a>
+    </div>
+    <div class="footer-note">MIT License · Built by <a href="https://github.com/AnwarSup" target="_blank">AnwarSup</a></div>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
