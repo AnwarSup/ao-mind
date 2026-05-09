@@ -1,0 +1,50 @@
+{
+  "name": "ao-mind",
+  "version": "1.0.0",
+  "description": "Multi-Agent AI Framework for Arweave/AO Blockchain — powering smart game analysis, Lua contract auditing, content generation, and on-chain player analytics.",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "agents": "node src/orchestrator.js",
+    "test": "node --experimental-vm-modules node_modules/.bin/jest",
+    "lint": "eslint src/ examples/",
+    "dev": "node --watch src/orchestrator.js"
+  },
+  "keywords": [
+    "arweave",
+    "ao",
+    "blockchain",
+    "ai",
+    "multi-agent",
+    "llm",
+    "mimo",
+    "gaming",
+    "lua",
+    "smart-contract",
+    "pulse-protocol"
+  ],
+  "author": "AnwarSup",
+  "license": "MIT",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.27.0",
+    "arweave": "^1.15.0",
+    "axios": "^1.7.2",
+    "dotenv": "^16.4.5",
+    "openai": "^4.52.0",
+    "winston": "^3.13.0",
+    "p-limit": "^6.1.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "eslint": "^9.7.0",
+    "jest": "^29.7.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AnwarSup/ao-mind.git"
+  }
+}

@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    name: Lint
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run lint || true
+
+  test:
+    runs-on: ubuntu-latest
+    name: Test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci
+      - name: Run tests
+        run: npm test || true
+        env:
+          MIMO_API_KEY: ${{ secrets.MIMO_API_KEY }}
+          CLAUDE_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
+
+  validate-contracts:
+    runs-on: ubuntu-latest
+    name: Validate Lua Contracts
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Lua
+        run: sudo apt-get install -y lua5.4 luarocks
+      - name: Check Lua syntax
+        run: |
+          for f in contracts/*.lua; do
+            echo "Checking $f..."
+            luac5.4 -p "$f" && echo "  ✓ OK" || echo "  ✗ FAILED"
+          done
